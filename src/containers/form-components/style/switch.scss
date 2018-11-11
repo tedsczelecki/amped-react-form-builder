@@ -1,0 +1,64 @@
+//@import '../../../../styles/variables';
+//@import '../../../../styles/mixins';
+//
+//
+//.adept-form-component__switch {
+//  display: flex;
+//  width: 100%;
+//  justify-content: space-between;
+//  margin-top: $gutter/4;
+//  margin-bottom: $gutter/4;
+//  align-items: center;
+//
+//  &__container {
+//    position: relative;
+//  }
+//
+//  &__input {
+//    position: absolute;
+//    width: 100%;
+//    height: $form-switch-indicator-size;
+//    z-index: 9;
+//    cursor: pointer;
+//    min-height: $form-switch-height;
+//    min-width: $form-switch-height;
+//    opacity: 0;
+//    top: -$form-switch-indicator-size/2;
+//
+//    &:checked + .adept-form-component__switch {
+//      &__visual {
+//        background: $primary-color;
+//        .adept-form-component__switch__indicator {
+//          left: calc(100% - #{$form-switch-indicator-size});
+//          background: $form-switch-active-idicator-background;
+//        }
+//      }
+//    }
+//  }
+//
+//  &__indicator {
+//    @include transition;
+//    height: $form-switch-indicator-size;
+//    width: $form-switch-indicator-size;
+//    position: absolute;
+//    left: 0px;
+//    background: $form-switch-indicator-background;
+//    border: solid 1px $form-switch-indicator-border-color;
+//    border-radius: 50%;
+//    top: 50%;
+//    transform: translateY(-50%);
+//  }
+//
+//  &__visual {
+//    @include transition;
+//    height: $form-switch-height;
+//    width: $form-switch-width;
+//    border-radius: $form-switch-border-radius;
+//    background: $form-switch-background;
+//    position: relative;
+//  }
+//
+//  label {
+//    cursor: pointer;
+//  }
+//}

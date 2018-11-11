@@ -1,0 +1,34 @@
+@import '../../../style/_variables.scss';
+
+.amped-form {
+
+  &__actions {
+    margin-top: $gutter/2;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  &__cell {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: $gutter/2;
+    align-self: start;
+  }
+
+  &__grid {
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    column-gap: $gutter;
+    margin-bottom: $gutter/2;
+
+    @for $i from 1 through 12 {
+      &--#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+  }
+}

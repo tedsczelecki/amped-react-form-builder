@@ -1,0 +1,35 @@
+@import '../../../style/variables';
+@import 'materialize-css/sass/components/_variables.scss';
+@import 'materialize-css/sass/components/forms/_checkboxes.scss';
+
+.amped-checkbox-list {
+  &__group {
+    display: flex;
+
+    &--horizontal {
+      flex-direction: row;
+
+    }
+
+    &--vertical {
+      flex-direction: column;
+      .amped-checkbox-list__group__item {
+        &:last-child{
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    &__item {
+      padding: 0 $gutter/2 $gutter/2 0;
+    }
+  }
+
+  &__group-label {
+    padding-bottom: $gutter/2;
+  }
+
+  [type="checkbox"].filled-in:checked + span:not(.lever):before{
+    left: 0 !important;
+  }
+}
