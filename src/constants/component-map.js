@@ -1,10 +1,10 @@
-import Checkbox from '../containers/form-components/checkbox';
-import Header from '../containers/form-components/header';
-import Number from '../containers/form-components/number';
-import Radio from '../containers/form-components/radio';
-import Switch from '../containers/form-components/switch';
-import Textarea from '../containers/form-components/textarea';
-import TextField from '../containers/form-components/textfield';
+import Checkbox from '../components/form-components/checkbox';
+import Header from '../components/form-components/header';
+import Number from '../components/form-components/number';
+import Radio from '../components/form-components/radio';
+import Switch from '../components/form-components/switch';
+import Textarea from '../components/form-components/textarea';
+import TextField from '../components/form-components/textfield';
 
 const fieldComponentMap = {
   checkbox: {

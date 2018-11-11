@@ -1,8 +1,13 @@
-@import '../../../style/variables';
-@import 'materialize-css/sass/components/_variables.scss';
-@import 'materialize-css/sass/components/forms/_checkboxes.scss';
-
 .amped-checkbox-list {
+  @import '../../../style/global';
+  @import 'materialize-css/sass/components/_variables.scss';
+  @import 'materialize-css/sass/components/forms/_checkboxes.scss';
+
+  [type="checkbox"] + span:not(.lever),
+  [type="radio"]:not(:checked) + span, [type="radio"]:checked + span{
+    @include label;
+  }
+
   &__group {
     display: flex;
 
@@ -27,6 +32,7 @@
 
   &__group-label {
     padding-bottom: $gutter/2;
+    font-size: 1rem;
   }
 
   [type="checkbox"].filled-in:checked + span:not(.lever):before{

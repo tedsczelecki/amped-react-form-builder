@@ -2,7 +2,7 @@ import className from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import Button from '../form-components/button';
+import Button from '../../components/form-components/button';
 import componentMapDefault from '../../constants/component-map';
 import { formComponentMapShape, formDataShape } from '../../constants/shapes';
 import { generateFormValues } from '../../lib/form-utils';
@@ -59,6 +59,7 @@ const Form = ({
             };
 
             const props = {
+              disabled: col.disabled,
               id: `form-component-${col.name}`,
               label: getTranslation(col.label),
               name: col.name,

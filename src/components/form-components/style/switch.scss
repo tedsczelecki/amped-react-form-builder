@@ -1,0 +1,12 @@
+.amped-switch {
+  @import '../../../style/global';
+  @import 'materialize-css/sass/components/_variables.scss';
+  @import 'materialize-css/sass/components/forms/_switches.scss';
+
+  @include disabled;
+
+  &__off-label,
+  &__on-label {
+    @include label;
+  }
+}

@@ -1,47 +1,52 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import './style/switch.scss';
 
-const FormSwitch = (
-  {
-    id,
-    label,
-    name,
-    value,
-    values,
-    onChange
-  }) => {
-
+const FormSwitch = ({
+  disabled,
+  id,
+  label,
+  name,
+  value,
+  values,
+  onChange
+}) => {
   let _id = null;
 
   if (!id) {
     _id = `${name}-form-switch`;
   }
+  const [onLabel, offLabel] = label;
   const handleChange = (evt) => {
     onChange(evt.target.checked ? values.on : values.off);
   };
+
+  const switchClasses = classNames('amped-switch', {
+    'amped-switch--disabled': disabled,
+  });
+
   return (
-    <div className="adept-form-component__switch">
-      <label htmlFor={_id}>{label}</label>
-      <div className="adept-form-component__switch__container">
-        <input
-          checked={value === values.on || value === values.on.toString()}
-          className="adept-form-component__switch__input"
-          id={_id}
-          name={name}
-          type="checkbox"
-          onChange={handleChange}
-        />
-        <div className="adept-form-component__switch__visual">
-          <div className="adept-form-component__switch__indicator" />
-        </div>
+    <div class={switchClasses}>
+      <div className='switch'>
+        <label htmlFor={_id}>
+          <span className='amped-switch__off-label'>{offLabel}</span>
+          <input
+          disabled={disabled}
+            type='checkbox'
+            onChange={handleChange}
+          />
+          <span class='lever' />
+          <span className='amped-switch__on-label'>{onLabel}</span>
+        </label>
       </div>
     </div>
   );
 };
 
 FormSwitch.propTypes = {
+  disabled: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
@@ -51,10 +56,12 @@ FormSwitch.propTypes = {
   ]),
   values: PropTypes.shape({
     on: PropTypes.oneOfType([
+      PropTypes.bool,
       PropTypes.number,
       PropTypes.string
     ]).isRequired,
     off: PropTypes.oneOfType([
+      PropTypes.bool,
       PropTypes.number,
       PropTypes.string
     ]).isRequired
@@ -63,13 +70,14 @@ FormSwitch.propTypes = {
 };
 
 FormSwitch.defaultProps = {
+  disabled: false,
   id: '',
   label: 'Form Switch',
   name: 'form-switch',
   value: 0,
   values: {
-    on: '1',
-    off: '0',
+    on: true,
+    off: false,
   },
   onChange: () => {}
 };

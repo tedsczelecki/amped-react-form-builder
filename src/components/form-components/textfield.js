@@ -1,11 +1,13 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import './style/textfield.scss';
 
-class TextFieldContainer extends Component {
+class TextFieldContainer extends PureComponent {
 
   static propTypes = {
+    disabled: PropTypes.bool,
     id: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,
@@ -19,6 +21,7 @@ class TextFieldContainer extends Component {
   };
 
   static defaultProps = {
+    disabled: false,
     id: '',
     label: '',
     name: 'amped-textfield',
@@ -31,39 +34,23 @@ class TextFieldContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: this.props.value || ''
-    };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.value !== nextProps.value) {
-      this.setState(() => ({
-        value: this.state.value
-      }));
-    }
-  }
-
-  handleChange(value) {
-    this.setState(() => ({
-      value
-    }));
+  handleChange(e) {
+    this.props.onChange(e.target.value);
   }
 
   handleKeyDown(evt) {
     if (evt.which === 13) {
       this.props.onSubmit(this.state.value);
-      setImmediate(() => this.setState(() => ({
-        value: ''
-      })));
     }
   }
 
   render() {
     const {
+      disabled,
       id = `amped-textfield-${this.props.name}`,
       label,
       name,
@@ -71,19 +58,31 @@ class TextFieldContainer extends Component {
       type,
       value,
     } = this.props;
+
+    const textFieldClasses = classNames('amped-textfield', {
+      'amped-textfield--disabled': disabled,
+    });
+
+    const labelClasses = classNames({
+      'active': value,
+    });
+
     return (
-      <div className='amped-textfield'>
-        <label htmlFor={id}>{label}</label>
-        <input
-          id={id}
-          label={label}
-          name={name}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-        />
+      <div className={textFieldClasses}>
+        <div className='input-field'>
+          <input
+            disabled={disabled}
+            id={id}
+            label={label}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+          />
+          <label className={labelClasses} htmlFor={id}>{label}</label>
+        </div>
       </div>
     );
   }

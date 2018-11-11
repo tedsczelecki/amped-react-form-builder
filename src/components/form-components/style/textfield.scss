@@ -1,0 +1,22 @@
+.amped-textfield {
+  @import '../../../style/global';
+  @import 'materialize-css/sass/components/_variables.scss';
+  @import 'materialize-css/sass/components/forms/_input-fields.scss';
+
+  @include disabled;
+
+  &> .input-field {
+    margin-bottom: 0;
+
+    &> label {
+      @include label;
+    }
+  }
+
+  width: 100%;
+
+  input:focus + label{
+    transform: translateY(-14px) scale(.8);
+    transform-origin: 0 0;
+  }
+}

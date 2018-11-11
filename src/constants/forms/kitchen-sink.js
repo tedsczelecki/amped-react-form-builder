@@ -26,6 +26,21 @@ export default {
     ],
     [
       {
+        name: 'first_name',
+        label: 'First Name',
+        type: 'text',
+        disabled: true,
+      },
+      {
+        defaultValue: 'Franklin',
+        name: 'maiden_name',
+        label: 'Maiden Name',
+        type: 'text',
+
+      },
+    ],
+    [
+      {
         label: 'Option Lists',
         type: 'header',
       },
@@ -130,6 +145,32 @@ export default {
         props: {
           orientation: 'horizontal'
         }
+      },
+    ],
+    [
+      {
+        label: 'Switch',
+        type: 'header',
+      },
+    ],
+    [
+      {
+        name: 'on_off',
+        label: ['On', 'Off'],
+        type: 'switch',
+      },
+      {
+        disabled: true,
+        name: 'on_off',
+        label: ['Yes', 'No'],
+        type: 'switch',
+      },
+    ],
+
+    [
+      {
+        label: 'Select',
+        type: 'header',
       },
     ],
   ]
