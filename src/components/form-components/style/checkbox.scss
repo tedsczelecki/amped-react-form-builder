@@ -1,6 +1,4 @@
 .amped-checkbox-list {
-  @import '../../../style/global';
-  @import 'materialize-css/sass/components/_variables.scss';
   @import 'materialize-css/sass/components/forms/_checkboxes.scss';
 
   [type="checkbox"] + span:not(.lever),
@@ -37,5 +35,10 @@
 
   [type="checkbox"].filled-in:checked + span:not(.lever):before{
     left: 0 !important;
+  }
+
+  input[type="checkbox"]:focus + span:after,
+  input[type="radio"]:focus + span:before{
+    border-color: $secondary-color !important;
   }
 }

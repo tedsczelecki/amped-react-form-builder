@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import './style/checkbox.scss';
-
 const checkedCompare = (type, value, optionValue) => {
   if (type === 'checkbox') {
     return value.find((v) => v === optionValue);
@@ -40,6 +38,12 @@ const CheckboxList = ({
     }
   };
 
+  const handleKeyDown = (evt) => {
+    if (evt.which === 13) {
+      handleChange(evt);
+    }
+  };
+
   const groupClasses = classNames(
     'amped-checkbox-list__group',
     `amped-checkbox-list__group--${orientation}`,
@@ -63,6 +67,7 @@ const CheckboxList = ({
                 type={inputType}
                 value={option.value}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               />
               <span>{option.label}</span>
             </label>

@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import './style/textarea.scss';
-
 const Textarea = (
   {
     label,

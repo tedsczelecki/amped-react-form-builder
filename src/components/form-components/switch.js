@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import './style/switch.scss';
-
 const FormSwitch = ({
   disabled,
   id,
@@ -28,16 +26,16 @@ const FormSwitch = ({
   });
 
   return (
-    <div class={switchClasses}>
+    <div className={switchClasses}>
       <div className='switch'>
         <label htmlFor={_id}>
           <span className='amped-switch__off-label'>{offLabel}</span>
           <input
-          disabled={disabled}
+            disabled={disabled}
             type='checkbox'
             onChange={handleChange}
           />
-          <span class='lever' />
+          <span className='lever' />
           <span className='amped-switch__on-label'>{onLabel}</span>
         </label>
       </div>
@@ -48,9 +46,13 @@ const FormSwitch = ({
 FormSwitch.propTypes = {
   disabled: PropTypes.bool,
   id: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+  ]),
   name: PropTypes.string,
   value: PropTypes.oneOfType([
+    PropTypes.bool,
     PropTypes.number,
     PropTypes.string
   ]),

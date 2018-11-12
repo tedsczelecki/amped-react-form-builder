@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { AmpedForm } from './containers/form';
 import { kitchenSinkForm } from './constants/forms';
 
-import './app.scss';
+import './demo.scss';
 
-class App extends Component {
+class Demo extends Component {
   render() {
     return (
       <div className="form-builder-page">
-
         <AmpedForm
           formData={kitchenSinkForm}
+          onSubmit={(values) => console.log('Form submitted', values) }
         />
 
       </div>
@@ -19,4 +19,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Demo;

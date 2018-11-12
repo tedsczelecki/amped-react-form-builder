@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import './style/textfield.scss';
-
 class TextFieldContainer extends PureComponent {
 
   static propTypes = {

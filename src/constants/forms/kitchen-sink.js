@@ -166,12 +166,36 @@ export default {
         type: 'switch',
       },
     ],
-
     [
       {
         label: 'Select',
         type: 'header',
       },
     ],
+    [
+      {
+        name: 'select_list',
+        label: 'Select list',
+        type: 'select',
+        options: [
+          {
+            label: 'Option 1',
+            value: 'option_1'
+          },
+          {
+            label: 'Option 2',
+            value: 'option_2'
+          },
+          {
+            label: 'Option 3',
+            value: 'option_3'
+          },
+          {
+            label: 'Option 4',
+            value: 'option_4'
+          },
+        ],
+      },
+    ]
   ]
 };
