@@ -7,8 +7,6 @@ import componentMapDefault from '../../constants/component-map';
 import { formComponentMapShape, formDataShape } from '../../constants/shapes';
 import { generateFormValues } from '../../lib/form-utils';
 
-import './style/form.scss';
-
 const translateOptions = (opts, getTranslation) => {
   return opts.map((opt) => {
     return {

@@ -11,7 +11,7 @@ const external = [
 
 export default [
   {
-    input: 'src/index.js',
+    input: 'src/entry.js',
     output: {
       file: 'dist/index.js',
       format: 'cjs',
@@ -35,4 +35,3 @@ export default [
     ],
   }
 ];
-
