@@ -1,3 +1,9 @@
+2018-11-15, Version 0.1.4
+=========================
+
+ * [package] added main script (tedsczelecki)
+
+
 2018-11-15, Version 0.1.3
 =========================
 
