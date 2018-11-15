@@ -1,3 +1,9 @@
+2018-11-15, Version 0.1.5
+=========================
+
+ * [package] fixed build script (tedsczelecki)
+
+
 2018-11-15, Version 0.1.4
 =========================
 
