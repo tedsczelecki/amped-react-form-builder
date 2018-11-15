@@ -6,6 +6,5 @@
 karma.conf.js
 node_modules
 rollup.config.js
-src
 test
 tests
