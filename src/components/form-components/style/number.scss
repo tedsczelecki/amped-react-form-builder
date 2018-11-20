@@ -1,0 +1,8 @@
+.amped-number {
+  @import '../../../style/global';
+
+  &__label {
+    @include label;
+    margin-left: 30px;
+  }
+}

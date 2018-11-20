@@ -34,6 +34,7 @@ const FormSwitch = ({
             disabled={disabled}
             type='checkbox'
             onChange={handleChange}
+            checked={value === values.on}
           />
           <span className='lever' />
           <span className='amped-switch__on-label'>{onLabel}</span>
