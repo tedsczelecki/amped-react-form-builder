@@ -5,19 +5,27 @@ const Number = (
   {
     id,
     label,
+    max,
+    min,
     name,
+    onChange,
     placeholder,
-    value,
-    onChange
+    value
   }) => (
-  <input
-    id={id}
-    label={label}
-    name={name}
-    type="number"
-    placeholder={placeholder}
-    onChange={onChange}
-  />
+  <div>
+    <input
+      id={id}
+      label={label}
+      max={max}
+      min={min}
+      name={name}
+      onChange={(e) => {onChange(e.target.value)}}
+      placeholder={placeholder}
+      type="number"
+      value={value}
+    />
+    <span className="amped-number__label">{label}</span>
+  </div>
 );
 
 Number.propTypes = {
@@ -29,7 +37,15 @@ Number.propTypes = {
     PropTypes.number,
     PropTypes.string
   ]),
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  max: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ]),
+  min: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ])
 };
 
 Number.defaultProps = {

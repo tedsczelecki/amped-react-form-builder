@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const checkedCompare = (type, value, optionValue) => {
+  if (typeof value === 'string') {
+    return value === optionValue;
+  }
   if (type === 'checkbox') {
     return value.find((v) => v === optionValue);
   }
