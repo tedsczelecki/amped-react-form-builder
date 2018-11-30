@@ -1,3 +1,9 @@
+2018-11-30, Version 0.1.6
+=========================
+
+ * changes to work better with base (billzhengadeptmind)
+
+
 2018-11-15, Version 0.1.5
 =========================
 
