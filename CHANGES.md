@@ -1,3 +1,14 @@
+2019-07-25, Version 0.2.1
+=========================
+
+ * [docs] updated README (tedsczelecki)
+
+ * [docs] updated README and package info (tedsczelecki)
+
+
+2018-11-30, Version 0.2.0
+=========================
+
 
 
 2018-11-30, Version 0.1.6
