@@ -1,44 +1,94 @@
-This project was bootstrapped with [Create React Demo](https://github.com/facebook/create-react-app).
+# Amped Form Builder
+> Tired of making form after form in React? Yeah me too. Build forms easier in React with JSON.
 
-## Available Scripts
+[![NPM Version][npm-image]][npm-url]
+[![Downloads Stats][npm-downloads]][npm-url]
 
-In the project directory, you can run:
+This library takes JSON and converts it into HTML and provides a simple API for you to interact with the form data. You can use the built in components and logic or provide a few props and make it totally custom.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+npm i -s amped-react-form-builder
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Usage example
 
-### `npm test`
+```jsx harmony
+import React, { Component } from 'react';
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+import { AmpedForm } from './containers/form';
+import { kitchenSinkForm } from './constants/forms';
 
-### `npm run build`
+import './demo.scss';
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default class Demo extends Component {
+  render() {
+    return (
+      <div className="form-builder-page">
+        <AmpedForm
+          formData={kitchenSinkForm}
+          onSubmit={(values) => console.log('Form submitted', values) }
+        />
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+      </div>
+    );
+  }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### AmpedForm
+> Props
+#### `formData`
+The JSON data that the form will be created out of.
 
-### `npm run eject`
+```javascript
+{
+  fields: [ 
+    [
+      {
+        label: String,
+        type: String
+      }
+    ]
+    
+  ]
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `fields` - `[[FieldObject]]` - An array containing all of the fields in the form. All of the indexes in this array are arrays themselves. You can think of this as the rows and columns in the form.
+- `FieldObject` Object - This contains all of the data for a single field in the form. There are many common keys between all fields types but some unique ones to provide extra functionality
+  - `label` [Required] - `String` - The label that will appear along side the field in a `<label></label>` tag
+  - `type` [Required] - `String` - The type of field that should be rendered. There is no fixed values for this with the exception of it needs to be a key in the `ComponentMap` that is passed to the form
+  - `name` - `String` - The key that the value of the field is saved to when passed back from the form. This defaults to the label
+  - `disabled` - `Boolean` - Whether the field is disabled or not.
+  - `defaultValue` - `String|Number` - If there is a default value and AmpedForm when there is a constant default value to the form. If you are creating a form to edit existing values, it will be easier to pass that data as `[name]: value` to the `formEntries` prop.
+  - `options` - `[{label: String, value: String|Number]` - This is used for form types with multiple options. The built in types are `select`, `checkbox`, `radio`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### `componentMap`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+When the built in field components won't work (like 99% of the time) you can override the built-in components with this prop
+```javascript
+{
+  [field type]: {
+    component: [field component]
+  }
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The built in ones are:
+ - `checkbox`
+ - `header`
+ - `number`
+ - `radio`
+ - `select`
+ - `switch`
+ - `text`
+ - `textarea`
 
-## Learn More
+You can pass these or makeup your own and pass it as the `type` in the json form data.
 
-You can learn more in the [Create React Demo documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### onSubmit
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This is a callback function which is invoked when the submit button is clicked or enter is hit enter in any of the built in text fields.
+
+

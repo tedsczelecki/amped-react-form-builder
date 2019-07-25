@@ -32,7 +32,6 @@ const fieldComponentMap = {
   text: {
     component: TextField,
   },
-
 };
 
 export default fieldComponentMap;
