@@ -1,9 +1,6 @@
 # Amped Form Builder
 > Tired of making form after form in React? Yeah me too. Build forms easier in React with JSON.
 
-[![NPM Version][npm-image]][npm-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 This library takes JSON and converts it into HTML and provides a simple API for you to interact with the form data. You can use the built in components and logic or provide a few props and make it totally custom.
 
 ## Installation
@@ -54,6 +51,7 @@ The JSON data that the form will be created out of.
     
   ]
 }
+
 ```
 
 - `fields` - `[[FieldObject]]` - An array containing all of the fields in the form. All of the indexes in this array are arrays themselves. You can think of this as the rows and columns in the form.
