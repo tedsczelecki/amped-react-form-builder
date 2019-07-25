@@ -1,4 +1,6 @@
-2019-07-25, Version 0.2.1
+
+
+2019-07-24, Version 0.2.1
 =========================
 
  * [docs] updated README (tedsczelecki)
