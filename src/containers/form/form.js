@@ -6,6 +6,7 @@ import Button from '../../components/form-components/button';
 import componentMapDefault from '../../constants/component-map';
 import { formComponentMapShape, formDataShape } from '../../constants/shapes';
 import { generateFormValues } from '../../lib/form-utils';
+import { builtInValidators } from '../../constants/validators';
 
 const translateOptions = (opts, getTranslation) => {
   return opts.map((opt) => {
@@ -20,6 +21,7 @@ const Form = ({
   ButtonComponent,
   buttonProps,
   componentMap,
+  errors,
   formData,
   getTranslation,
   submitLabel,
@@ -48,7 +50,14 @@ const Form = ({
             }
             const ElemComponent = elem.component;
             const handleChange = (fieldVal) => {
-              onFieldChange(col.name, fieldVal, col.label);
+              // const _value
+              let _value = fieldVal;
+
+              if (elem.formatter) {
+                _value = elem.formatter(fieldVal);
+              }
+
+              onFieldChange(col.name, _value, col.label);
             };
             const handleKeyDown = onKeyDown.bind(this, col.name);
             const elemProps = {
@@ -56,7 +65,11 @@ const Form = ({
               ...elem.props || {}
             };
 
-            const props = {
+            if (errors[col.name]) {
+              elemProps.errors = errors[col.name];
+            }
+
+            let props = {
               disabled: col.disabled,
               id: `form-component-${col.name}`,
               label: getTranslation(col.label),
@@ -67,6 +80,15 @@ const Form = ({
               onKeyDown: handleKeyDown,
               ...elemProps
             };
+
+            // if (elem.propsFromValues) {
+            //   props = {
+            //     ...props,
+            //     ...elem.propsFromValues(values)
+            //   }
+            // }
+            //
+            // console.log('ELEM', elem, props);
 
             if (col.options) {
               props.options = col.options;
@@ -174,10 +196,13 @@ class FormContainer extends Component {
     super(props);
 
     this.state = {
+      errors: {},
       values: this.props.formValues ?
-        this.props.formValues : this.generateValues(this.props.formData)
+        this.props.formValues : this.generateValues(this.props.formData),
+      flattenedData: this.props.formData && this.props.formData.fields && this.props.formData.fields.flat(),
     };
 
+    this.checkForErrors = this.checkForErrors.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -191,10 +216,46 @@ class FormContainer extends Component {
     }
   }
 
-  generateValues(data) {
+  checkForErrors() {
+    const {
+      values
+    } = this.state;
+    return this.state.flattenedData.reduce((acc, field) => {
+      const {
+        name,
+        required,
+        validators
+      } = field;
 
+      if (required) {
+        return validators.reduce((errAcc, validateKey) => {
+          let validateFunc;
+          if (typeof validateKey === 'function') {
+            validateFunc = validateKey(values[name]);
+          } else if (typeof validateKey === 'string' && builtInValidators[validateKey]) {
+            validateFunc = builtInValidators[validateKey];
+          }
+
+          if (validateFunc) {
+            const errorMessage = validateFunc(values[name]);
+            if (errorMessage) {
+              if (!errAcc[name]) {
+                errAcc[name] = []
+              }
+              errAcc[name].push(errorMessage)
+            }
+          }
+
+          return errAcc;
+        }, acc)
+      }
+
+      return acc;
+    }, {});
+  }
+
+  generateValues(data) {
     const values = generateFormValues(data);
-    console.log(values);
 
     this.props.onValuesGenerates(null, null, values);
     return values;
@@ -214,15 +275,31 @@ class FormContainer extends Component {
   }
 
   handleFormSubmit() {
-    this.props.onSubmit(this.state.values);
-    if (this.props.emptyOnSubmit) {
-      const values = Object.keys(this.state.values).reduce((ret, name) => ({
-        ...ret,
-        [name]: ''
-      }), {});
+    const errors = this.checkForErrors();
+
+    if (Object.keys(errors).length === 0) {
+      this.props.onSubmit({
+        ...(this.props.formData.hiddenFields || {}),
+        ...this.state.values
+      });
+      if (this.props.emptyOnSubmit) {
+        const values = Object.keys(this.state.values).reduce((ret, name) => ({
+          ...ret,
+          [name]: ''
+        }), {});
+        this.setState(() => ({
+          errors: {},
+          values,
+        }));
+      } else {
+        this.setState(() => ({
+          errors: {},
+        }))
+      }
+    } else {
       this.setState(() => ({
-        values
-      }));
+        errors,
+      }))
     }
   }
 
@@ -238,6 +315,7 @@ class FormContainer extends Component {
         ButtonComponent={this.props.ButtonComponent}
         buttonProps={this.props.buttonProps}
         componentMap={this.props.componentMap}
+        errors={this.state.errors}
         formData={this.props.formData}
         getTranslation={this.props.getTranslation}
         submitLabel={this.props.submitLabel}
