@@ -1,6 +1,6 @@
 {
   "name": "amped-react-form-builder",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Tired of making form after form in React? Yeah me too. Build forms easier in React with JSON.",
   "keywords": [
     "React",
